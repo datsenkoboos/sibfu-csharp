@@ -15,7 +15,16 @@ namespace DepartmentNamespace
             Employees = new List<Person>();
         }
 
-        
+        public string printEmployees()
+        {
+            string result = "==List of department's employees " + Title + "==\n";
+            foreach (var item in Employees)
+            {
+                result += item.Name + "\n";
+            }
+            result += "-----------------";
+            return result;
+        }
         public void hireEligibleCandidates(List<Person> candidates)
         {
             Employees = candidates.Where(candidateIsEligible).ToList();
