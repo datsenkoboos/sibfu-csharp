@@ -31,13 +31,12 @@ namespace FactoryNamespace
             };
             CandidatesData.ForEach((Person candidate) => Candidates.Add(candidate));
 
-            Departments.ForEach((Department department) => {
+            Departments.ForEach(department => {
                 department.hireEligibleCandidates(Candidates);
-                Console.WriteLine(department.Title);
-                Console.WriteLine("Employees:");
-                department.Employees.ForEach((Person employee) => Console.WriteLine($"Name: {employee.Name}, Age: {employee.Age}, Speciality: {employee.Speciality}, Score: {employee.Score}"));
-                Console.WriteLine("Left candidates:");
-                Candidates.ForEach((Person candidate) => Console.WriteLine($"Name: {candidate.Name}, Age: {candidate.Age}, Speciality: {candidate.Speciality}, Score: {candidate.Score}"));
+                department.printEmployees();
+                // Console.WriteLine(department.printEmployees());
+                // Console.WriteLine("Left candidates:");
+                // Candidates.ForEach((Person candidate) => Console.WriteLine($"Name: {candidate.Name}, Age: {candidate.Age}, Speciality: {candidate.Speciality}, Score: {candidate.Score}"));
             });
         }
     }

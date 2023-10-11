@@ -15,7 +15,7 @@ namespace DepartmentNamespace
             Employees = new List<Person>();
         }
 
-        public string printEmployees()
+        public void printEmployees()
         {
             string result = "==List of department's employees " + Title + "==\n";
             foreach (var item in Employees)
@@ -23,7 +23,8 @@ namespace DepartmentNamespace
                 result += item.Name + "\n";
             }
             result += "-----------------";
-            return result;
+            Console.WriteLine(result);
+            // return result;
         }
         public void hireEligibleCandidates(List<Person> candidates)
         {
@@ -44,6 +45,17 @@ namespace DepartmentNamespace
         {
         }
 
+        public new void printEmployees()
+        {
+            string result = "==List of department's employees " + Title + "==\n";
+            foreach (var item in Employees)
+            {
+                result += item.Name + ", score: " + item.Score + "\n";
+            }
+            result += "-----------------";
+            Console.WriteLine(result);
+            // return result;
+        }
         protected override bool candidateIsEligible(Person candidate)
         {
             return candidate.Score >= 4.5 && candidate.Speciality == Specialities.Electrician;
@@ -55,6 +67,17 @@ namespace DepartmentNamespace
         {
         }
 
+        public new void printEmployees()
+        {
+            string result = "==List of department's employees " + Title + "==\n";
+            foreach (var item in Employees)
+            {
+                result += item.Name + ", age: " + item.Age + ", speciality: " + item.Speciality + "\n";
+            }
+            result += "-----------------";
+            Console.WriteLine(result);
+            // return result;
+        }
         protected override bool candidateIsEligible(Person candidate)
         {
             bool scoreIsEligible = candidate.Score >= 4.8;
@@ -70,6 +93,17 @@ namespace DepartmentNamespace
         {
         }
 
+        public new void printEmployees()
+        {
+            string result = "==List of department's employees " + Title + "==\n";
+            foreach (var item in Employees)
+            {
+                result += item.Name + ", age: " + item.Age + "\n";
+            }
+            result += "-----------------";
+            Console.WriteLine(result);
+            // return result;
+        }
         protected override bool candidateIsEligible(Person candidate)
         {
             bool scoreIsEligible = candidate.Score >= 4.0;
