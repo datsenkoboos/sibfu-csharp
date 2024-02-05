@@ -1,32 +1,53 @@
-﻿// 1
-// Console.WriteLine("What is your name?");
-// string name = Console.ReadLine()!;
-// Console.WriteLine("What language do you already know?");
-// string lang = Console.ReadLine()!;
-// Console.WriteLine($"{name} knows {lang}");
-// 2
-// double x = Convert.ToDouble(Console.ReadLine());
-// double y = Convert.ToDouble(Console.ReadLine());
-// Console.WriteLine((Math.Atan(x / y)/Math.PI) * 180);
-// 3
-// int s = 163;
-// int v = Convert.ToInt32(Console.ReadLine());
-// int t = Convert.ToInt32(Console.ReadLine());
-// Console.WriteLine($"{v * t % s}, {v * t / s}");
-// 4
-// var random = new Random();
-// int a = Convert.ToInt32(Console.ReadLine());
-// int b = Convert.ToInt32(Console.ReadLine());
-// Console.WriteLine(random.Next(a, b + 1));
-// 5
-// int a = Convert.ToInt32(Console.ReadLine());
-// int b = Convert.ToInt32(Console.ReadLine());
-// int c = Convert.ToInt32(Console.ReadLine());
-// int d = Convert.ToInt32(Console.ReadLine());
-// Console.WriteLine((a / c) * (b / d) - (a * b - c) / (c * d) + Math.Sqrt(d));
-// 6
-int a = Convert.ToInt32(Console.ReadLine());
-int b = Convert.ToInt32(Console.ReadLine());
-int c = Convert.ToInt32(Console.ReadLine());
-int p = (a + b + c) / 2;
-Console.WriteLine(Math.Sqrt(p * (p - a) * (p - b) * (p - c)));
+﻿using System;
+
+void printCustomer (Customer cust)
+{
+    string output = string.Format($"{cust.FullName} - Нежность: {cust.GentleRate}");
+    if (cust.Smartphone != null)
+        output += string.Format($", Смартфон: {cust.Smartphone.SerialNumber}.");
+    else output += ".";
+    Console.WriteLine(output);
+}
+
+List<GentleSmartphone> smartphones = new List<GentleSmartphone>
+{
+    new GentleSmartphone(new Random().Next(0, 1000), 100),
+    new GentleSmartphone(new Random().Next(0, 1000), 60),
+    new GentleSmartphone(new Random().Next(0, 1000), 200),
+    new GentleSmartphone(new Random().Next(0, 1000), 180)
+};
+List<Customer> customers = new List<Customer>
+{
+    new Customer("Some guy", 100),
+    new Customer("Some guy 2", 120),
+    new Customer("Some guy 3", 80),
+    new Customer("Some guy 4", 50)
+};
+Factory factory = new Factory(customers);
+factory.Smartphones = smartphones;
+
+Console.WriteLine("Смартфоны:");
+foreach(GentleSmartphone smar in smartphones)
+{
+    Console.WriteLine($"#{smar.SerialNumber} - {smar.Sensor.Sensitivity}");
+}
+
+Console.WriteLine("Наши покупатели до:");
+foreach(Customer cust in customers)
+    printCustomer(cust);
+
+factory.SaleSmartphone();
+
+Console.WriteLine("Наши покупатели после:");
+foreach (Customer cust in customers)
+    printCustomer(cust);
+
+Console.WriteLine("Смартфоны после:");
+if (smartphones.Count() == 0) Console.WriteLine("Пусто");
+else
+{
+    foreach (GentleSmartphone smar in smartphones)
+    {
+        Console.WriteLine($"#{smar.SerialNumber} - {smar.Sensor.Sensitivity}");
+    }
+}
