@@ -1,53 +1,55 @@
-﻿using System;
+﻿ProgrammingDiscipline pd = new ProgrammingDiscipline("Программирование", 10);
+HistoryDiscipline hd = new HistoryDiscipline("История", 4, 80);
+MathsDiscipline md = new MathsDiscipline("Математика", 75);
+ORGDiscipline od = new ORGDiscipline("ОРГ");
 
-void printCustomer (Customer cust)
+List<Discipline> disciplines = new List<Discipline>
 {
-    string output = string.Format($"{cust.FullName} - Нежность: {cust.GentleRate}");
-    if (cust.Smartphone != null)
-        output += string.Format($", Смартфон: {cust.Smartphone.SerialNumber}.");
-    else output += ".";
-    Console.WriteLine(output);
-}
-
-List<GentleSmartphone> smartphones = new List<GentleSmartphone>
-{
-    new GentleSmartphone(new Random().Next(0, 1000), 100),
-    new GentleSmartphone(new Random().Next(0, 1000), 60),
-    new GentleSmartphone(new Random().Next(0, 1000), 200),
-    new GentleSmartphone(new Random().Next(0, 1000), 180)
+    pd, hd, md, od
 };
-List<Customer> customers = new List<Customer>
+
+Student student1 = new Student("George");
+student1.Practices.Add(pd, 10);
+student1.Practices.Add(hd, 5);
+student1.FinalControl.Add(hd, 82);
+student1.FinalControl.Add(md, 80);
+
+Student student2 = new Student("Jaden");
+student2.Practices.Add(pd, 8);
+student2.Practices.Add(hd, 3);
+student2.FinalControl.Add(hd, 85);
+student2.FinalControl.Add(md, 75);
+
+Student student3 = new Student("Bill");
+student3.Practices.Add(pd, 8);
+student3.Practices.Add(hd, 4);
+student3.FinalControl.Add(hd, 72);
+student3.FinalControl.Add(md, 68);
+
+Student student4 = new Student("Max");
+student4.Practices.Add(pd, 10);
+student4.Practices.Add(hd, 2);
+student4.FinalControl.Add(hd, 75);
+student4.FinalControl.Add(md, 70);
+
+List<Student> students = new List<Student>
 {
-    new Customer("Some guy", 100),
-    new Customer("Some guy 2", 120),
-    new Customer("Some guy 3", 80),
-    new Customer("Some guy 4", 50)
+    student1, student2, student3, student4
 };
-Factory factory = new Factory(customers);
-factory.Smartphones = smartphones;
 
-Console.WriteLine("Смартфоны:");
-foreach(GentleSmartphone smar in smartphones)
+foreach(Discipline dist in disciplines)
 {
-    Console.WriteLine($"#{smar.SerialNumber} - {smar.Sensor.Sensitivity}");
-}
-
-Console.WriteLine("Наши покупатели до:");
-foreach(Customer cust in customers)
-    printCustomer(cust);
-
-factory.SaleSmartphone();
-
-Console.WriteLine("Наши покупатели после:");
-foreach (Customer cust in customers)
-    printCustomer(cust);
-
-Console.WriteLine("Смартфоны после:");
-if (smartphones.Count() == 0) Console.WriteLine("Пусто");
-else
-{
-    foreach (GentleSmartphone smar in smartphones)
+    Console.WriteLine(dist.Name);
+    Console.WriteLine("---------");
+    foreach(Student stud in students)
     {
-        Console.WriteLine($"#{smar.SerialNumber} - {smar.Sensor.Sensitivity}");
+        string res = dist.Check(stud);
+        if (res == od.Check(student1))
+        {
+            Console.WriteLine(res);
+            break;
+        }
+        Console.WriteLine(res);
     }
+    Console.WriteLine();
 }
